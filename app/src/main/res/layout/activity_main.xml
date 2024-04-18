@@ -24,15 +24,19 @@
         android:layout_below="@id/textViewTitle"
         android:padding="8dp"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/apartadosButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ver Apartados"
+        android:src="@drawable/carro"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="Ver Apartados"
         android:layout_margin="8dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         />
+
+
 
     <Button
         android:id="@+id/AgregarProducto"
