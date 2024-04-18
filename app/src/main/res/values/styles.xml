@@ -1,0 +1,15 @@
+<resources>
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/purple_200</item>
+    </style>
+
+    <!-- Theme for the MercadoUTM app -->
+    <style name="Theme.MercadoUTM" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Personaliza los atributos de tu tema aquí -->
+    </style>
+
+</resources>
