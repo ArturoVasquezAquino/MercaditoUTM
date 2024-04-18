@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:id="@+id/BackgroundView"
+        android:layout_width="441dp"
+        android:layout_height="354dp"
+        android:layout_alignParentStart="true"
+        android:background="#800000"
+        android:padding="16dp"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-5dp"
+        tools:layout_editor_absoluteY="-3dp" />
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="243dp"
+        android:layout_height="341dp"
+        android:layout_alignParentStart="true"
+        android:background="#FAF8F8"
+        android:padding="16dp"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="175dp" />
+
+    <ImageView
+        android:id="@+id/LogoimageView"
+        android:layout_width="100dp"
+        android:layout_height="93dp"
+        app:srcCompat="@drawable/logo_universidad_tecnol_gica_de_la_mixteca_svg"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/GrettingtextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="!Bievenido! "
+        android:textSize="24sp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="142dp"
+        tools:layout_editor_absoluteY="277dp" />
+
+    <TextView
+        android:id="@+id/UsertextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email o usuario "
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="109dp"
+        tools:layout_editor_absoluteY="351dp" />
+
+    <TextView
+        android:id="@+id/PasswordtextView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contraseña"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="109dp"
+        tools:layout_editor_absoluteY="417dp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="20dp"
+        android:layout_height="17dp"
+        app:srcCompat="@drawable/user"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="277dp"
+        tools:layout_editor_absoluteY="370dp" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="20dp"
+        android:layout_height="21dp"
+        app:srcCompat="@drawable/padlock"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="276dp"
+        tools:layout_editor_absoluteY="436dp" />
+
+    <TextView
+        android:id="@+id/TitletextView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/alfa_slab_one"
+        android:text="MercaditoUTM"
+        android:textColor="#800000"
+        android:textSize="24sp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="106dp"
+        tools:layout_editor_absoluteY="213dp" />
+
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="161dp"
+        android:text="Login"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="476dp" />
+
+    <TextView
+        android:id="@+id/ForgotPasswordtextView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¿Olvidaste tu contraseña?"
+        android:textColor="#D5D0D0"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="125dp"
+        tools:layout_editor_absoluteY="524dp" />
+
+    <Button
+        android:id="@+id/buttonRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#800000"
+        android:text="Registrarse "
+        android:textColor="#878686"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="277dp"
+        tools:layout_editor_absoluteY="29dp" />
+
+    <EditText
+        android:id="@+id/editTextTextEmailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="362dp" />
+
+    <EditText
+        android:id="@+id/editTextNumberPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberPassword"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="431dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

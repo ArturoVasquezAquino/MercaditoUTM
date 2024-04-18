@@ -22,30 +22,39 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/textViewTitle"
-        android:padding="8dp"/>
+        android:layout_marginTop="5dp"
+        android:padding="8dp" />
 
     <ImageButton
         android:id="@+id/apartadosButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/carro"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/apar"
         android:background="?android:attr/selectableItemBackground"
         android:contentDescription="Ver Apartados"
         android:layout_margin="8dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        />
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"/>
+
+    <ImageButton
+        android:id="@+id/agregarButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/agregar"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="Agregar Producto"
+        android:layout_margin="3dp"
+        android:layout_toStartOf="@id/apartadosButton"
+        android:layout_alignTop="@id/apartadosButton"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"/>
 
 
-
-    <Button
-        android:id="@+id/AgregarProducto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Agregar Producto"
-        android:layout_margin="8dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        />
 
 </RelativeLayout>
