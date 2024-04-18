@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -110,10 +111,10 @@ data class Product(val name: String, val price: String, val image: Int, var rese
 // Actividad principal
 class MainActivity : AppCompatActivity(), ProductAdapter.OnApartarClickListener {
 
-    val db = Room.databaseBuilder(
+    /*val db = Room.databaseBuilder(
         applicationContext,
         AppDatabase::class.java, "producto"
-    ).build()
+    ).build()*/
 
 
     private lateinit var adapter: ProductAdapter
@@ -153,7 +154,7 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnApartarClickListener 
         recyclerView.adapter = adapter
 
         // Configurar el OnClickListener para el botón "Apartados"
-        val apartadosButton: Button = findViewById(R.id.apartadosButton)
+        val apartadosButton: ImageButton = findViewById(R.id.apartadosButton)
         apartadosButton.setOnClickListener {
             isMainPage = false // Cambiar a la página de apartados
             val intent = Intent(this, Apartados::class.java)
