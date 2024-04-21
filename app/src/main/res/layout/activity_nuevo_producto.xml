@@ -1,0 +1,85 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/nombreEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre del producto"
+        android:padding="16dp"
+        android:layout_marginTop="16dp"/>
+
+    <EditText
+        android:id="@+id/descripcionEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descripción del producto"
+        android:padding="16dp"
+        android:layout_below="@id/nombreEditText"
+        android:layout_marginTop="8dp"/>
+
+    <EditText
+        android:id="@+id/cantidadEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Cantidad disponible"
+        android:inputType="number"
+        android:padding="16dp"
+        android:layout_below="@id/descripcionEditText"
+        android:layout_marginTop="8dp"/>
+    <EditText
+        android:id="@+id/precioEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Precio"
+        android:inputType="number"
+        android:padding="16dp"
+        android:layout_below="@id/cantidadEditText"
+        android:layout_marginTop="8dp"/>
+
+    <ImageView
+        android:id="@+id/imagePreview"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_rounded_corners"
+        android:layout_below="@id/precioEditText"
+        android:layout_marginTop="16dp"/>
+
+    <ImageButton
+        android:id="@+id/selectImageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/camara"
+        android:background="?android:attr/selectableItemBackground"
+        android:layout_below="@id/imagePreview"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitCenter" />
+
+    <ImageButton
+        android:id="@+id/selectLocalIButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/galeria"
+        android:background="?android:attr/selectableItemBackground"
+        android:layout_below="@id/imagePreview"
+        android:layout_toEndOf="@id/selectImageButton"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="fitCenter" />
+
+
+    <Button
+        android:id="@+id/guardarButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guardar"
+        android:layout_below="@id/selectImageButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
+
+</RelativeLayout>
