@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "881329418428",
+    "firebase_url": "https://productosutm-default-rtdb.firebaseio.com",
+    "project_id": "productosutm",
+    "storage_bucket": "productosutm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881329418428:android:4f9fef8ca4d07c9351a0b9",
+        "android_client_info": {
+          "package_name": "com.example.mercadoutm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9qVZvmbQhD8KAcK-eapK4LsgHRfZJotg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
