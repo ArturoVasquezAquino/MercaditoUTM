@@ -20,10 +20,15 @@ import java.io.Serializable
 
 
 // Adaptador para los productos
-class ProductAdapter(private val products: List<Product>, private val listener: OnApartarClickListener, private val isMainPage: Boolean) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ProductAdapter(
+    private val products: List<Product>,
+    private val listener: OnClickListener,
+    private val currentPage: Int)
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    interface OnApartarClickListener {
+    interface OnClickListener {
         fun onApartarClick(producto: Product)
+        fun onComprarClick(producto: Product)
         fun onEliminarClick(producto: Product)
     }
 
@@ -42,28 +47,38 @@ class ProductAdapter(private val products: List<Product>, private val listener: 
         }
     }
 
-
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val product = products[position]
-        if (isMainPage) { //muestra los elementos de la pagina principal
-            val mainHolder = holder as MainViewHolder
-            mainHolder.productName.text = product.name
-            mainHolder.productPrice.text = product.price
-            mainHolder.productImage.setImageResource(product.image)
-            mainHolder.agregarButton.visibility = View.VISIBLE
-            mainHolder.eliminarButton.visibility = View.GONE
-            mainHolder.agregarButton.setOnClickListener {
-                listener.onApartarClick(product)
+
+        when (currentPage) {
+            1 -> {
+                holder as MainViewHolder
+                holder.productName.text = product.name
+                holder.productPrice.text = product.price
+                holder.productImage.setImageResource(product.image)
+                holder.agregarButton.visibility = View.VISIBLE
+                holder.eliminarButton.visibility = View.GONE
+                holder.agregarButton.setOnClickListener {
+                    listener.onApartarClick(product)
+                }
+                holder.comprarButton.setOnClickListener {
+                    listener.onComprarClick(product)
+                }
             }
-        } else { //Muestra elementos de la pagina de apartados
-            val apartadosHolder = holder as ApartadosViewHolder
-            apartadosHolder.productName.text = product.name
-            apartadosHolder.productPrice.text = product.price
-            apartadosHolder.productImage.setImageResource(product.image)
-            apartadosHolder.agregarButton.visibility = View.GONE
-            apartadosHolder.eliminarButton.visibility = View.VISIBLE
-            apartadosHolder.eliminarButton.setOnClickListener {
-                listener.onEliminarClick(product)
+            2 -> {
+                holder as ApartadosViewHolder
+                holder.productName.text = product.name
+                holder.productPrice.text = product.price
+                holder.productImage.setImageResource(product.image)
+                holder.agregarButton.visibility = View.GONE
+                holder.eliminarButton.visibility = View.VISIBLE
+                holder.eliminarButton.setOnClickListener {
+                    listener.onEliminarClick(product)
+                }
+            }
+            3 -> {
+                holder as RealizarCompraViewHolder
+
             }
         }
     }
@@ -73,10 +88,11 @@ class ProductAdapter(private val products: List<Product>, private val listener: 
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (isMainPage) {
-            VIEW_TYPE_MAIN
-        } else {
-            VIEW_TYPE_APARTADOS
+        return when (currentPage) {
+            1 -> VIEW_TYPE_MAIN
+            2 -> VIEW_TYPE_APARTADOS
+            3 -> VIEW_TYPE_REALIZAR_COMPRA
+            else -> throw IllegalArgumentException("Invalid view type")
         }
     }
 
@@ -85,6 +101,7 @@ class ProductAdapter(private val products: List<Product>, private val listener: 
         val productPrice: TextView = itemView.findViewById(R.id.textViewProductPrice)
         val productImage: ImageView = itemView.findViewById(R.id.imageViewProduct)
         val agregarButton: Button = itemView.findViewById(R.id.apartarButton)
+        val comprarButton: Button = itemView.findViewById(R.id.comprarButton)
         val eliminarButton: Button = itemView.findViewById(R.id.eliminarButton)
     }
 
@@ -96,33 +113,32 @@ class ProductAdapter(private val products: List<Product>, private val listener: 
         val eliminarButton: Button = itemView.findViewById(R.id.eliminarButton)
     }
 
+    inner class RealizarCompraViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        // si
+    }
+
     companion object {
         private const val VIEW_TYPE_MAIN = 1
         private const val VIEW_TYPE_APARTADOS = 2
+        private const val VIEW_TYPE_REALIZAR_COMPRA = 3
     }
 }
-
-
 
 // Clase para representar un producto
 data class Product(val name: String, val price: String, val image: Int, var reservado: Boolean = false) : Serializable {
 }
 
 // Actividad principal
-class MainActivity : AppCompatActivity(), ProductAdapter.OnApartarClickListener {
-
+class MainActivity : AppCompatActivity(), ProductAdapter.OnClickListener {
     /*val db = Room.databaseBuilder(
         applicationContext,
         AppDatabase::class.java, "producto"
     ).build()*/
 
-
     private lateinit var adapter: ProductAdapter
     private var products = mutableListOf<Product>()
-
     private val apartadosList = mutableListOf<Product>()
-    var isMainPage = true
-
+    var currentPage = 1
     val APARTADOS_REQUEST_CODE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -149,27 +165,31 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnApartarClickListener 
         }
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        adapter = ProductAdapter(products, this, isMainPage)
+        adapter = ProductAdapter(products, this, currentPage)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
         // Configurar el OnClickListener para el botón "Apartados"
         val apartadosButton: ImageButton = findViewById(R.id.apartadosButton)
         apartadosButton.setOnClickListener {
-            isMainPage = false // Cambiar a la página de apartados
+            currentPage = 2 // Cambiar a la página de apartados
             val intent = Intent(this, Apartados::class.java)
             intent.putExtra("apartadosList", ArrayList(apartadosList))
             startActivityForResult(intent, APARTADOS_REQUEST_CODE)
         }
     }
 
-    override fun onApartarClick(product: Product) {
-        apartadosList.add(product)
-        Toast.makeText(this, "Producto apartado: ${product.name}", Toast.LENGTH_SHORT).show()
+    override fun onApartarClick(producto: Product) {
+        apartadosList.add(producto)
+        Toast.makeText(this, "Producto apartado: ${producto.name}", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onEliminarClick(product: Product) {
-        apartadosList.remove(product)
+    override fun onComprarClick(producto: Product) {
+        Toast.makeText(this, "COMPRAAAAAA: ${producto.name}", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onEliminarClick(producto: Product) {
+        apartadosList.remove(producto)
         adapter.notifyDataSetChanged()
         val intent = Intent(this, Apartados::class.java)
         intent.putExtra("apartadosList", ArrayList(apartadosList))
@@ -189,7 +209,7 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnApartarClickListener 
     }
 
     private fun regresarAPrincipal() {
-        isMainPage = true // Cambiar a la página principal
+        currentPage = 1 // Cambiar a la página principal
         adapter.notifyDataSetChanged() // Notificar al adaptador que los datos han cambiado
 
         // Resto del código para regresar a la actividad principal

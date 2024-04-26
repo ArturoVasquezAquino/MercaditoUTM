@@ -1,6 +1,5 @@
 package com.example.mercadoutm
 
-
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class Apartados : AppCompatActivity(), ProductAdapter.OnApartarClickListener {
+class Apartados : AppCompatActivity(), ProductAdapter.OnClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var noApartadosTextView: TextView
     private lateinit var adapter: ProductAdapter
@@ -31,7 +30,7 @@ class Apartados : AppCompatActivity(), ProductAdapter.OnApartarClickListener {
         }
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = ProductAdapter(apartadosList, this, isMainPage = false)
+        adapter = ProductAdapter(apartadosList, this, currentPage = 2)
         recyclerView.adapter = adapter
 
         if (apartadosList.isEmpty()) {
@@ -68,5 +67,7 @@ class Apartados : AppCompatActivity(), ProductAdapter.OnApartarClickListener {
         }
     }
 
-
+    override fun onComprarClick(producto: Product) {
+        TODO("si")
+    }
 }
