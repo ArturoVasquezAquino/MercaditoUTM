@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,16 +16,37 @@
         android:scaleType="centerCrop"
         android:src="@drawable/resource" />
 
-
     <TextView
         android:id="@+id/textViewProductName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Product Name"
+        android:text="Nombre"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/imageViewProduct"
         app:layout_constraintTop_toTopOf="@+id/imageViewProduct" />
+
+    <TextView
+        android:id="@+id/textViewProductDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Descripcion"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewProduct"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProductName" />
+
+    <TextView
+        android:id="@+id/textViewProductCantidad"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Cantidad"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewProduct"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProductDesc" />
 
     <TextView
         android:id="@+id/textViewProductPrice"
@@ -33,10 +54,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Price"
+        android:text="Precio"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/imageViewProduct"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProductName" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewProductCantidad" />
 
     <Button
         android:id="@+id/apartarButton"
