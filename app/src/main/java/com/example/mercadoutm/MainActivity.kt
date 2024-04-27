@@ -1,8 +1,6 @@
 package com.example.mercadoutm
-import android.app.ActionBar
 import android.app.Activity
 import android.content.ContentValues.TAG
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -25,7 +22,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
 import java.io.Serializable
 
 
@@ -130,7 +126,15 @@ class ProductAdapter(private val products: List<Product>, private val listener: 
 
 
 // Clase para representar un producto
-data class Product(val nombre: String,  val descripcion : String,val cantidad:String, val precio: String, val imagenUrl: String, var reservado: Boolean = false) : Serializable {
+data class Product(
+    val uid: String,
+    val nombre: String,
+    val descripcion: String,
+    val cantidad: String,
+    val precio: String,
+    val imagenUrl: String,
+    var reservado: Boolean = false
+) : Serializable {
 }
 
 // Actividad principal
@@ -162,7 +166,7 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnApartarClickListener 
                     val precio = snapshot.child("precio").getValue(String::class.java) ?: ""
                     val imageURL = snapshot.child("imagenUrl").getValue(String::class.java) ?: ""
                     // Aquí debes obtener la referencia a la imagen, dependiendo de cómo la hayas guardado en la base de datos
-                    val product = Product(nombre,descripcion,cantidad, precio, imageURL) // Reemplaza R.drawable.default_image con la referencia real a la imagen
+                    val product = Product(snapshot.key!!, nombre, descripcion, cantidad, precio, imageURL)
                     products.add(product)
                 }
                 adapter.notifyDataSetChanged()
@@ -185,7 +189,7 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnApartarClickListener 
                     val precio = document.getString("precio") ?: ""
                     val imageUrl = document.getString("imageUrl") ?: ""
                     // Aquí debes obtener la referencia a la imagen, dependiendo de cómo la hayas guardado en la base de datos
-                    val product = Product(nombre,descripcion,cantidad, precio, imageUrl) // Reemplaza R.drawable.default_image con la referencia real a la imagen
+                    val product = Product( document.id,nombre, descripcion, cantidad, precio, imageUrl)
                     products.add(product)
                 }
                 adapter.notifyDataSetChanged()
