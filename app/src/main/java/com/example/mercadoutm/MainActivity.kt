@@ -140,11 +140,13 @@ data class Product(
 // Actividad principal
 class MainActivity : AppCompatActivity(), ProductAdapter.OnApartarClickListener {
 
+
     // Firebase Realtime Database
     val database = FirebaseDatabase.getInstance()
     val myRef = database.getReference("productos")
     // Firebase Firestore
     val db = FirebaseFirestore.getInstance()
+
     private lateinit var adapter: ProductAdapter
     private var products = mutableListOf<Product>()
     private val apartadosList = mutableListOf<Product>()
@@ -220,7 +222,8 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnApartarClickListener 
 
 
         // Configurar el OnClickListener para el botón "Apartados"
-        val apartadosButton: ImageButton = findViewById(id.apartadosButton)
+        val apartadosButton: ImageButton = findViewById(R.id.apartadosButton)
+
         apartadosButton.setOnClickListener {
             isMainPage = false // Cambiar a la página de apartados
             val intent = Intent(this, Apartados::class.java)
