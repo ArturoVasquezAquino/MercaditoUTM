@@ -265,3 +265,4 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnApartarClickListener 
         finish()
     }
 }
+
