@@ -156,10 +156,12 @@ class NuevoProducto : AppCompatActivity() {
     }
 
 
-    private fun guardarProducto(nombre: String,  cantidad: String,descripcion: String, precio: String, imageUri: Uri?) {
+    private fun guardarProducto(nombre: String, cantidad: String, descripcion: String, precio: String, imageUri: Uri?) {
         val key = myRef.push().key
         if (key != null) {
-            val producto = Product(nombre, cantidad, descripcion, precio, "") // No incluir el campo "image" en el constructor
+
+            val producto = Product(key, nombre, cantidad, descripcion, precio, "")
+
             myRef.child(key).setValue(producto)
 
             imageUri?.let { uri ->

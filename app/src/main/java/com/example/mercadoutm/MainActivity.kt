@@ -137,7 +137,15 @@ class ProductAdapter(
 }
 
 // Clase para representar un producto
-data class Product(val nombre: String,  val descripcion : String,val cantidad:String, val precio: String, val imagenUrl: String, var reservado: Boolean = false) : Serializable {
+data class Product(
+    val uid: String,
+    val nombre: String,
+    val descripcion: String,
+    val cantidad: String,
+    val precio: String,
+    val imagenUrl: String,
+    var reservado: Boolean = false
+) : Serializable {
 }
 
 // Actividad principal
@@ -168,7 +176,7 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnClickListener {
                     val precio = snapshot.child("precio").getValue(String::class.java) ?: ""
                     val imageURL = snapshot.child("imagenUrl").getValue(String::class.java) ?: ""
                     // Aquí debes obtener la referencia a la imagen, dependiendo de cómo la hayas guardado en la base de datos
-                    val product = Product(nombre,descripcion,cantidad, precio, imageURL) // Reemplaza R.drawable.default_image con la referencia real a la imagen
+                    val product = Product(snapshot.key!!, nombre, descripcion, cantidad, precio, imageURL)
                     products.add(product)
                 }
                 adapter.notifyDataSetChanged()
@@ -191,7 +199,7 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnClickListener {
                     val precio = document.getString("precio") ?: ""
                     val imageUrl = document.getString("imageUrl") ?: ""
                     // Aquí debes obtener la referencia a la imagen, dependiendo de cómo la hayas guardado en la base de datos
-                    val product = Product(nombre,descripcion,cantidad, precio, imageUrl) // Reemplaza R.drawable.default_image con la referencia real a la imagen
+                    val product = Product( document.id,nombre, descripcion, cantidad, precio, imageUrl)
                     products.add(product)
                 }
                 adapter.notifyDataSetChanged()
