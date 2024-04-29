@@ -256,6 +256,7 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnClickListener {
 
     // Configurar el OnClickListener para el botón "Apartados"
         val apartadosButton: ImageButton = findViewById(id.apartadosButton)
+
         apartadosButton.setOnClickListener {
             currentPage = 2 // Cambiar a la página de apartados
             val intent = Intent(this, Apartados::class.java)

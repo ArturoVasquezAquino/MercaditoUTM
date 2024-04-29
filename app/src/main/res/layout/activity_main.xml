@@ -21,7 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/textViewTitle"
-        android:padding="8dp"/>
+        android:layout_marginTop="5dp"
+        android:padding="8dp" />
 
     <ImageButton
         android:id="@+id/apartadosButton"
