@@ -24,7 +24,6 @@
         <activity
             android:name=".CrearUsuario"
             android:exported="false" />
-
         <activity
             android:name=".NuevoProducto"
             android:exported="false" />
@@ -41,6 +40,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Compra"
+            android:exported="false" />
     </application>
 
 </manifest>

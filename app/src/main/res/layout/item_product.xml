@@ -76,4 +76,14 @@
         app:layout_constraintTop_toTopOf="parent"
         android:visibility="gone"/>
 
+    <Button
+        android:id="@+id/comprarButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="2dp"
+        android:text="Comprar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

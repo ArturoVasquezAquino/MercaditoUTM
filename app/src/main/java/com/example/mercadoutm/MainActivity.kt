@@ -1,5 +1,6 @@
 package com.example.mercadoutm
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -49,6 +50,10 @@ class ProductAdapter(
                 val view = inflater.inflate(layout.ventana_apartados, parent, false)
                 ApartadosViewHolder(view)
             }
+            VIEW_TYPE_REALIZAR_COMPRA -> {
+                val view = inflater.inflate(layout.compra, parent, false)
+                ComprarViewHolder(view)
+            }
             else -> throw IllegalArgumentException("Invalid view type")
         }
     }
@@ -72,6 +77,9 @@ class ProductAdapter(
                 mainHolder.agregarButton.setOnClickListener {
                     listener.onApartarClick(product)
                 }
+                mainHolder.comprarButton.setOnClickListener {
+                    listener.onComprarClick(product)
+                }
             }
             2 -> { // Muestra elementos de la página de apartados
                 val apartadosHolder = holder as ApartadosViewHolder
@@ -88,6 +96,17 @@ class ProductAdapter(
                 apartadosHolder.eliminarButton.setOnClickListener {
                     listener.onEliminarClick(product)
                 }
+            }
+            3 -> {
+                val comprarHolder = holder as ComprarViewHolder
+                comprarHolder.productName.text = "Nombre: ${product.nombre}"
+                comprarHolder.productDesc.text = product.descripcion
+                comprarHolder.productCant.text = "Cantidad: ${product.cantidad}"
+                comprarHolder.productPrice.text = "Precio $${product.precio}"
+                // Carga la imagen utilizando Glide y la URL de descarga
+                Glide.with(holder.itemView.context)
+                    .load(product.imagenUrl) // Utiliza la URL de descarga de la imagen
+                    .into(comprarHolder.productImage)
             }
         }
     }
@@ -113,6 +132,7 @@ class ProductAdapter(
         val productImage: ImageView = itemView.findViewById(id.imageViewProduct)
         val agregarButton: Button = itemView.findViewById(id.apartarButton)
         val eliminarButton: Button = itemView.findViewById(id.eliminarButton)
+        val comprarButton: Button = itemView.findViewById(id.comprarButton)
     }
 
     inner class ApartadosViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -123,6 +143,14 @@ class ProductAdapter(
         val productImage: ImageView = itemView.findViewById(id.imageViewProduct)
         val agregarButton: Button = itemView.findViewById(id.apartarButton)
         val eliminarButton: Button = itemView.findViewById(id.eliminarButton)
+    }
+
+    inner class ComprarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val productName: TextView = itemView.findViewById(id.textViewProductName)
+        val productDesc: TextView = itemView.findViewById(id.textViewProductDesc)
+        val productCant: TextView = itemView.findViewById(id.textViewProductCantidad)
+        val productPrice: TextView = itemView.findViewById(id.textViewProductPrice)
+        val productImage: ImageView = itemView.findViewById(id.imageViewProduct)
     }
 
     inner class RealizarCompraViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -161,6 +189,7 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnClickListener {
     private val apartadosList = mutableListOf<Product>()
     var currentPage = 1
     val APARTADOS_REQUEST_CODE = 1
+    val COMPRAR_REQUEST_CODE = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -219,15 +248,11 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnClickListener {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-
         val agregarButton: ImageButton = findViewById(R.id.agregarButton)
         agregarButton.setOnClickListener {
             val intent = Intent(this, NuevoProducto::class.java)
             startActivity(intent)
         }
-
-
-
 
     // Configurar el OnClickListener para el botón "Apartados"
         val apartadosButton: ImageButton = findViewById(id.apartadosButton)
@@ -243,9 +268,14 @@ class MainActivity : AppCompatActivity(), ProductAdapter.OnClickListener {
         apartadosList.add(product)
         Toast.makeText(this, "Producto apartado: ${product.nombre}", Toast.LENGTH_SHORT).show()
     }
-
+    
     override fun onComprarClick(product: Product) {
         Toast.makeText(this, "COMPRAAAAAA: ${product.nombre}", Toast.LENGTH_SHORT).show()
+        currentPage = 3
+        adapter.notifyDataSetChanged()
+        val intent = Intent(this, Compra::class.java)
+        intent.putExtra("producto", product)
+        startActivityForResult(intent, COMPRAR_REQUEST_CODE)
     }
 
     override fun onEliminarClick(producto: Product) {
